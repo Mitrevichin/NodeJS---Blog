@@ -10,7 +10,12 @@ app.use(express.static('public'));
 
 // Templating engine configuration (hbs)
 app.engine('hbs', hbs.create({
-    extname: '.hbs'
+    extname: '.hbs',
+    // HELPERS: The most common and cleanest way when setting dynamic values. 
+    // OTHER oppurtinies are: 1.Using Inline JavaScript (Client-Side Rendering) 2.Setting Data in the Route Handler as a context when rendering a page 3.Using middleware (res.locals.year = new Date()...)
+    helpers: {
+        getCurrentYear: () => new Date().getFullYear()
+    }
 }).engine);
 app.set('view engine', 'hbs');
 
