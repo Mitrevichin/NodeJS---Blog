@@ -2,9 +2,13 @@ require('dotenv').config();
 const express = require('express');
 const hbs = require('express-handlebars');
 const mainRouter = require('./server/routes/main');
+const connectDB = require('./server/config/db');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+
+// Connect to DB
+connectDB();
 
 app.use(express.static('public'));
 
