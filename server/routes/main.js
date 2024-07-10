@@ -1,9 +1,18 @@
 const express = require('express');
 const router = express.Router();
 
-//Routes
+//Routes (It will be without explicit controller cause the app is not gonna be big)
 router.get('/', (req, res) => {
-    res.render('index');
+    const locals = {
+        title: 'NodeJS Blog',
+        description: 'Simple blog with NodeJS, Express and MongoDB'
+    }
+
+    res.render('index', { locals });
+});
+
+router.get('/about', (req, res) => {
+    res.render('about');
 });
 
 

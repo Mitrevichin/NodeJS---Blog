@@ -4,13 +4,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta name="description" content={{locals.description}}>
+    <title>{{locals.title}}</title>
+    {{!-- To pay attention to the path! --}}
+    <link rel="stylesheet" href="/css/style.css">
+    <script defer src="/js/script.js"></script>
 </head>
 
 <body>
 
+    <div class="container">
+        {{> header}}
+        <main class="main">
+            {{{body}}}
+        </main>
+        {{> footer}}
+    </div>
 
-    {{{body}}}
 </body>
 
 </html>
