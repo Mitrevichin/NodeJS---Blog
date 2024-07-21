@@ -322,7 +322,7 @@ img {
 
 
 .searchBar.open {
-    transform: translateY(0);
+    transform: translateY(7px);
     transition: transform 0.1s;
 }
 
@@ -337,6 +337,7 @@ img {
     right: 0;
     color: var(--gray-light);
     padding: 15px;
+    cursor: pointer;
 }
 
 

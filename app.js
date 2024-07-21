@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const hbs = require('express-handlebars');
 const mainRouter = require('./server/routes/main');
+const adminRouter = require('./server/routes/admin');
 const connectDB = require('./server/config/db');
 
 const app = express();
@@ -10,6 +11,8 @@ const PORT = process.env.PORT || 5000;
 // Connect to DB
 connectDB();
 
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.use(express.static('public'));
 
 // Templating engine configuration (hbs)
@@ -24,5 +27,6 @@ app.engine('hbs', hbs.create({
 app.set('view engine', 'hbs');
 
 app.use('/', mainRouter);
+app.use('/', adminRouter);
 
 app.listen(PORT, () => console.log(`App listening on port ${PORT}`));

@@ -1,0 +1,26 @@
+<div class="author">
+    <h1 class="author__heading">Search Results</h1>
+</div>
+
+<section class="articles">
+
+    {{#if articles.length}}
+    <ul class="article-ul">
+
+        {{#each articles}}
+        <li>
+            <a href="/post/{{_id}}">
+                <span>{{title}}</span>
+                <span class="article-list__date">{{formattedCreatedAt}}</span>
+            </a>
+        </li>
+        {{/each}}
+
+    </ul>
+    {{else}}
+    <p>No articles found.</p>
+    {{/if}}
+
+    </ul>
+
+</section>
