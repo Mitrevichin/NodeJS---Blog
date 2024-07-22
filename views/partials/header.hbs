@@ -3,10 +3,11 @@
 
     <nav class="header__nav">
         <ul>
-            <li><a href="/" class="">Home</a></li>
-            <li><a href="/about" class="">About</a></li>
-            <li><a href="/contact" class="">Contact</a></li>
+            <li><a href="/" class="{{isActiveRoute '/' currRoute}}">Home</a></li>
+            <li><a href="/about" class="{{isActiveRoute '/about' currRoute}}">About</a></li>
+            <li><a href="/contact" class="{{isActiveRoute '/contact' currRoute}}">Contact</a></li>
         </ul>
+
     </nav>
 
     <div class="header__button">

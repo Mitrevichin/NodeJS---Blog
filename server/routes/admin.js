@@ -166,7 +166,7 @@ router.get('/edit-post/:id', authMiddleware, async (req, res) => {
 
 
 // Admin - Edit a Post (PUT)
-router.put('/edit-post', authMiddleware, async (req, res) => {
+router.put('/edit-post/:id', authMiddleware, async (req, res) => {
     try {
 
         await Post.findByIdAndUpdate(req.params.id, {
@@ -181,6 +181,22 @@ router.put('/edit-post', authMiddleware, async (req, res) => {
         console.log(error);
     }
 
+});
+
+// Admin - Delete Post
+router.delete('/delete-post/:id', authMiddleware, async (req, res) => {
+    try {
+        await Post.findByIdAndDelete(req.params.id);
+        res.redirect('/dashboard');
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+// Admin - Logout
+router.get('/logout', (req, res) => {
+    res.clearCookie('token');
+    res.redirect('/');
 });
 
 module.exports = router;
