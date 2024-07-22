@@ -1,1 +1,20 @@
-<h1>Dashboard</h1>
+<div class="admin-title">
+    <h2>Posts</h2>
+    <a href="/add-post" class="button">+ Add New</a>
+</div>
+
+<ul class="admin-posts">
+    {{#each articles}}
+
+    <li>
+        <a href="/post/{{_id}}">{{title}} &nearr;</a>
+        <div class="admin-post-controls">
+            <a href="/edit-post/{{_id}}" class="btn">Edit</a>
+            <form action="/delete-post/{{_id}}?_method=DELETE" method="POST">
+                <button class="btn">Delete</button>
+            </form>
+        </div>
+    </li>
+
+    {{/each}}
+</ul>

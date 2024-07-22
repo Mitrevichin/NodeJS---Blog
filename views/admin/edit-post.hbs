@@ -1,0 +1,19 @@
+<a href="/dashboard">&larr; Back</a>
+<div class="admin-title">
+    <h2>View / Edit Post</h2>
+    <form action="/delete-post/{{_id}}?_method=DELETE" method="POST">
+        <button class="btn-delete btn">Delete</button>
+    </form>
+</div>
+
+<form action="/edit-post/{{_id}}?_method=PUT" method="POST">
+
+    <label><b>Title</b></label>
+    <input type="text" placeholder="Post Title" name="title" value="{{article.title}}">
+
+    <label><b>Content</b></label>
+    <textarea name="body" cols="50" rows="10">{{article.body}}</textarea>
+
+    <button class="btn">Update</button>
+
+</form>

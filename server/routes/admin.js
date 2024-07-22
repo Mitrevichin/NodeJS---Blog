@@ -92,7 +92,95 @@ router.post('/register', async (req, res) => {
 
 // Admin - Dashboard
 router.get('/dashboard', authMiddleware, async (req, res) => {
-    res.render('admin/dashboard');
+    try {
+        const locals = {
+            title: 'Dashboard',
+            description: 'Simple blog with NodeJS, Express and MongoDB'
+        }
+        const articles = await Post.find({}).lean();
+
+        res.render('admin/dashboard', {
+            locals,
+            articles,
+            layout: adminLayout
+        });
+
+    } catch (error) {
+        console.log(error);
+    }
+
+});
+
+// Admin - Create New Post (GET)
+router.get('/add-post', authMiddleware, async (req, res) => {
+    try {
+        const locals = {
+            title: 'Add Post',
+            description: 'Simple blog with NodeJS, Express and MongoDB'
+        }
+        const articles = await Post.find({}).lean();
+        res.render('admin/add-post', { locals, layout: adminLayout });
+
+    } catch (error) {
+        console.log(error);
+    }
+
+});
+
+// Admin - Create New Post (POST)
+router.post('/add-post', authMiddleware, async (req, res) => {
+    try {
+        const { title, body } = req.body;
+        const newPost = new Post({ title, body });
+        await newPost.save();
+
+        res.redirect('/dashboard');
+
+    } catch (error) {
+        console.log(error);
+    }
+
+});
+
+// Admin - Get a Post (GET)
+router.get('/edit-post/:id', authMiddleware, async (req, res) => {
+    try {
+        const locals = {
+            title: 'Edit Post',
+            description: 'Simple blog with NodeJS, Express and MongoDB'
+        }
+
+        const article = await Post.findById(req.params.id).lean();
+
+        res.render('admin/edit-post', {
+            locals,
+            article,
+            layout: adminLayout
+        });
+
+    } catch (error) {
+        console.log(error);
+    }
+
+});
+
+
+// Admin - Edit a Post (PUT)
+router.put('/edit-post', authMiddleware, async (req, res) => {
+    try {
+
+        await Post.findByIdAndUpdate(req.params.id, {
+            title: req.body.title,
+            body: req.body.body,
+            updatedAt: Date.now()
+        });
+
+        res.redirect(`/edit-post/${req.params.id}`);
+
+    } catch (error) {
+        console.log(error);
+    }
+
 });
 
 module.exports = router;
